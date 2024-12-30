@@ -21,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         Observable.just("Apple", "Orange", "Banana")
+            .map { input ->
+                when (input) {
+                    "Banana" -> throw RuntimeException("Element $input in the collection")
+                    else -> input
+                }
+            }
             .subscribe(
                 /* onNext = */ { value: String? -> Log.d(TAG, "Received: $value")},
                 /* onError = */ { error: Throwable? -> Log.d(TAG, "Error: $error")},
